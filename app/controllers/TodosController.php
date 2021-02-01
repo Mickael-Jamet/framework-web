@@ -9,6 +9,7 @@ use Ubiquity\utils\http\USession;
 
 /**
   * Controller TodosController
+  * @property \Ajax\php\ubiquity\JsUtils $jquery
   */
 class TodosController extends ControllerBase{
     const CACHE_KEY = 'datas/lists/';
@@ -29,14 +30,14 @@ class TodosController extends ControllerBase{
             $list = USession::get(self::LIST_SESSION_KEY, []);
             $this->displayList($list);
         }
-        $this->showMessage('Bienvenu !', 'TodoLists permet de gérer',  'info', 'info circle',
+        $this->showMessage('Bienvenu !', 'TodoLists permet de gérer des listes ...',  'info', 'info circle',
         [['url'=>Router::path('todos.new'),'caption'=>'créer une nouvelle liste','style'=>'basic inverted']]);
 	}
 
     #[Post(path: "TodosController/add", name: 'todos.add')]
     public function addElement(){
         $list=USession::get(self::LIST_SESSION_KEY);
-        if(URequest::has('elements')){
+        if(URequest::filled('elements')){
             $elements=explode("\n",URequest::post('elements'));
             foreach ($elements as $elm){
                 $list[]=$elm;
@@ -50,13 +51,23 @@ class TodosController extends ControllerBase{
 
 	#[Get(path: "todos/delete/{index}", name: 'todos.delete')]
 	public function delecteElement($index){
-		
+        $list=USession::get(self::LIST_SESSION_KEY);
+        if(isset($list[$index])){
+            array_splice($list, $index, 1);
+            USession::set(self::LIST_SESSION_KEY, $list);
+        }
+        $this->displayList($list);
 	}
 
 
 	#[Post(path: "todos/edit/{index}", name: 'todos.edit')]
 	public function editElement($index){
-		
+        $list=USession::get(self::LIST_SESSION_KEY);
+        if(isset($list[$index])){
+            $list[$index] = URequest::post('editElement');
+            USession::set(self::LIST_SESSION_KEY, $list);
+        }
+        $this->displayList($list);
 	}
 
 
@@ -73,8 +84,15 @@ class TodosController extends ControllerBase{
 
 	#[Get(path: "TodosController/newList/{force}", name: 'todos.new')]
 	public function newList($force=false){
-		USession::set(self::LIST_SESSION_KEY,[]);
-		$this->displayList([]);
+        if($force != false || !USession::exists(self::LIST_SESSION_KEY)){
+            USession::set(self::LIST_SESSION_KEY, []);
+            $this->displayList(USession::get(self::LIST_SESSION_KEY));
+        }else if(USession::exists(self::LIST_SESSION_KEY)) {
+            $this->showMessage("Nouvelle Liste", "Une liste existe déjà. Voulez vous la vider ?", "", "",
+                [['url' =>Router::path('todos.new/1'),'caption'=>'Créer une nouvelle liste','style'=>'basic inverted'],
+                    ['url' =>Router::path('todos.menu'),'caption'=>'Annuler','style'=>'basic inverted']]);
+            $this->displayList(USession::get(self::LIST_SESSION_KEY));
+        }
 	}
 
 
@@ -91,9 +109,11 @@ class TodosController extends ControllerBase{
     }
 	
 	public function displayList($list){
+        if(\count($list)>0){
+            $this->jquery->show('._saveList','','',false);
+        }
 		$this->jquery->change('#multiple', '$("._form").toggle();');
 		$this->jquery->renderView('TodosController/displayList.html', ['list'=>$list]);
-
 	}
 
 
