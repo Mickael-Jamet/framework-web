@@ -1,0 +1,12 @@
+{% extends "OrgaController/base.html" %}
+{% block header %}
+Organisations
+{% endblock %}
+{% block body %}
+<ul>
+    {% for orga in orgas %}
+        <li><h4><a href="{{ path('orga.getOne', [orga.id]) }}">{{ orga }}</a></h4>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
