@@ -1,0 +1,32 @@
+{% extends "OrgaController/base.html" %}
+
+{% block header %}
+<h2>Modifier une organisation : {{ byId }}</h2>
+{% endblock %}
+
+{% block body %}
+<form action='' class='form'>
+    <p class='field required'>
+        <label class='label required' for='name'>Nom</label>
+        <input class='text-input' id='name' name='name' required type='text' value="{{byId.name}}" placeholder="{{byId.name}}">
+    </p>
+    <p class='field required'>
+        <label class='label' for='domain'>Domaine</label>
+        <input class='text-input' id='domain' name='domain' required type='text' value="{{byId.domain}}" placeholder="{{byId.domain}}">
+    </p>
+    <p class='field required'>
+        <label class='label' for='aliases'>Alias</label>
+        <input class='text-input' id='aliases' name='aliases' required type='text' value="{{byId.aliases}}" placeholder="{{byId.aliases}}">
+    </p>
+    <p class='field half'>
+    <div class="ui two column grid">
+        <div class="column">
+            <input class='button' type='submit' value='Valider'>
+        </div>
+        <div class="column">
+            <input class='buttonAnnuler' type='button' onclick="location.href='{{ path('orga.index') }}'" value='Annuler'>
+        </div>
+    </div>
+    </p>
+</form>
+{% endblock %}

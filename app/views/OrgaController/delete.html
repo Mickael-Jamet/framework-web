@@ -1,0 +1,23 @@
+{% extends "OrgaController/base.html" %}
+
+{% block header %}
+<h2>Supprimer une organisation : {{ byId }}</h2>
+{% endblock %}
+
+{% block body %}
+<form action='' class='form'>
+    <p class='field'>
+        <label class='label'>Êtes-vous sûr de vouloir supprimer l'organisation "{{ byId }}" ?</label>
+    </p>
+    <p class='field half'>
+    <div class="ui two column grid">
+        <div class="column">
+            <input class='button' type='submit' value='Supprimer'>
+        </div>
+        <div class="column">
+            <input class='buttonAnnuler' type='button' onclick="location.href='{{ path('orga.index') }}'" value='Annuler'>
+        </div>
+    </div>
+    </p>
+</form>
+{% endblock %}
