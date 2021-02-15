@@ -77,7 +77,15 @@ class MyAuth extends \Ubiquity\controllers\auth\AuthController{
 
     protected function noAccessMessage(FlashMessage $fMessage)
     {
-        $fMessage->setTitle('Accès interdit');
-        $fMessage->setContent("Vous n'êtes pas autorisé à accéder à cette ressource.");
+        $fMessage->setTitle('Accès interdit !');
+        $fMessage->setContent("Vous n'êtes pas autorisé à accéder à cette page(/).");
     }
+
+    protected function terminateMessage(FlashMessage $fMessage)
+    {
+        $fMessage->setTitle('Fermeture');
+        $fMessage->setContent("Vous avez été correctement déconnecté de l'application");
+    }
+
+
 }
