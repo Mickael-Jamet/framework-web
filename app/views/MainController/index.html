@@ -1,5 +1,9 @@
 <a href="{{ path('main.testAjax') }}" class="ui button" data-target="#response">Test Ajax load User</a>
 <a href="{{ path('groups.list') }}" class="ui black button" data-target="#response">Liste des organisations</a>
 <a href="{{ path('newOrga') }}" class="ui green button" data-target="#response">Nouvelle organisation</a>
+<a href="{{ path('new.user') }}" class="ui basic olive button" data-target="#new-user">
+    <i class="plus icon"></i> Ajouter un utilisateur...
+</a>
+<div id="new-user" style="margin-top: 3px"></div>
 <div id="response" class="ui segment"></div>
 {{ script_foot |raw }}
