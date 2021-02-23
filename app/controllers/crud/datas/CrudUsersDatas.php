@@ -6,5 +6,8 @@ use Ubiquity\controllers\crud\CRUDDatas;
   * Class CrudUsersDatas
   */
 class CrudUsersDatas extends CRUDDatas{
-	//use override/implement Methods
+    public function getFieldNames($model)
+    {
+        return ['firstname', 'lastname', 'email'];
+    }
 }

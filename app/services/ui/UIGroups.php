@@ -1,7 +1,10 @@
 <?php
 namespace services\ui;
 
+ use Ajax\semantic\html\collections\form\HtmlForm;
+ use Ajax\semantic\widgets\dataform\DataForm;
  use models\Group;
+ use models\User;
  use Ubiquity\controllers\Controller;
  use Ubiquity\controllers\Router;
 

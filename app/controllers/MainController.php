@@ -12,6 +12,7 @@ namespace controllers;
  use Ubiquity\controllers\auth\AuthController;
  use Ubiquity\controllers\auth\WithAuthTrait;
  use Ubiquity\orm\DAO;
+ use Ubiquity\utils\http\URequest;
  use Ubiquity\utils\http\USession;
 
  /**
@@ -81,7 +82,7 @@ use WithAuthTrait;
 
     #[Get('new/user', name: 'new.user')]
     public function newUser(){
-        $this->ui->newUser('frm-user');
+        $this->uiService->newUser('frm-user');
         $this->jquery->renderView('main/vForm.html',['formName'=>'frm-user']);
     }
 
