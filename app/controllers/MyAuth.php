@@ -28,7 +28,7 @@ class MyAuth extends \Ubiquity\controllers\auth\AuthController{
 			$email=URequest::post($this->_getLoginInputName());
             $password=URequest::post($this->_getPasswordInputName());
             if($email != null && $password != null ){
-                $user=DAO::getOne(User::class,'email= ? , password= ?', false, [$email, $password]);
+                $user=DAO::getOne(User::class,'email= ?', false, [$email]);
                 if (isset($user)){
                     return $user;
                 }
