@@ -40,7 +40,14 @@ class MainController extends ControllerBase{
 	#[Route(path: "store",name: "store")]
 	public function store(){
         $sections=DAO::getAll(Section::class,'', ['products']);
-        $this->jquery->renderView('MainController/store.html',['section'=>$sections]);
+        $this->jquery->renderView('MainController/store.html',['sections'=>$sections]);
+	}
+
+
+	#[Route(path: "section/{id}",name: "section")]
+	public function section($id){
+        $section=DAO::getById(Section::class,$id,['products']);
+        $this->jquery->renderView('MainController/sectionStore.html', ['section'=>$section]);
 	}
 
 }

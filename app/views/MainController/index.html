@@ -4,60 +4,61 @@
             <div class="ui header">
                 <div class="content">
                     <div class="header">Menu</div>
-                    <div class="item">{{ _userInfo|raw }}</div>
                 </div>
             </div>
         </div>
         <div class="column right aligned">
-            <div class="ui green button">User Info</div>
+            <div class="item">{{ _userInfo|raw }}</div>
         </div>
     </div>
 </div>
-<div  class="ui two column grid">
-    <div class="column">
-        <div class="ui attached segment"> Store</div>
-        <div class="ui attached black segment">
-            <div class="item">
-                <a class="ui black button">
-                    Mes commandes
-                </a>
-                <div style="margin-top: 5px"></div>
+<div class="ui right aligned grid">
+    <div class="center aligned two column row">
+        <div class="column">
+            <div class="ui attached segment"> Store</div>
+            <div class="ui attached black segment">
+                <div class="item">
+                    <a class="ui black button">
+                        Mes commandes
+                    </a>
+                    <div style="margin-top: 5px"></div>
+                </div>
+                <div class="item">
+                    <a href="{{ path('store') }}" class="ui black button">
+                        Parcourir le store
+                    </a>
+                    <div style="margin-top: 5px"></div>
+                </div>
             </div>
-            <div class="item">
-                <a href="{{ path('new.user') }}" class="ui black button">
-                    Parcourir le store
-                </a>
-                <div style="margin-top: 5px"></div>
+        </div>
+        <div class="column">
+            <div class="ui attached segment">Paniers</div>
+            <div class="ui attached black segment">
+                <div class="item">
+                    <a class="ui green button">Nouveau...</a>
+                    <div style="margin-top: 5px"></div>
+                </div>
+                <div class="item">
+                    <a class="ui black button">Mes paniers ({{ user.baskets|length }})</a>
+                    <div style="margin-top: 5px"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="column">
-        <div class="ui attached segment"> Paniers</div>
-        <div class="ui attached black segment">
+    <div class="sixteen wide column">
+        <div class="ui attached segment">Promotions en cours</div>
+        <div class="ui tiny horizontal list">
+            {% for promo in promos %}
             <div class="item">
-                <a class="ui green button">
-                    Nouveau...
-                </a>
-                <div style="margin-top: 5px"></div>
+                <div class="content">
+                    <div class="header">{{ promo.name }}</div>
+                    <div class="body">{{ promo.price }}</div>
+                </div>
             </div>
-            <div class="item">
-                <a class="ui black button">
-                    Mes paniers
-                </a>
-                <div style="margin-top: 5px"></div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
-<div class="ui two columns grid">
-    <div class="column">
-        <div class="ui attached segment"> Promotions en cours</div>
-        <div class="ui attached black segment">    </div>
-    </div>
-</div>
-<div class="ui two columns grid">
-    <div class="column">
+    <div class="sixteen wide column">
         <div class="ui attached segment"> Consultés récemment</div>
-        <div class="ui attached black segment">    </div>
     </div>
 </div>
