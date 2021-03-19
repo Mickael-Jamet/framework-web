@@ -1,12 +1,15 @@
 <?php
 namespace controllers;
+use models\Section;
 use Ubiquity\attributes\items\di\Autowired;
 use Ubiquity\attributes\items\router\Route;
 use Ubiquity\controllers\auth\AuthController;
 use Ubiquity\controllers\auth\WithAuthTrait;
 use services\dao\UserRepository;
 use services\ui\UIServices;
- /**
+use Ubiquity\orm\DAO;
+
+/**
   * Controller MainController
   */
 class MainController extends ControllerBase{
@@ -33,4 +36,11 @@ class MainController extends ControllerBase{
     protected function getAuthController(): AuthController {
         return new MyAuth($this);
     }
+
+	#[Route(path: "store",name: "store")]
+	public function store(){
+        $sections=DAO::getAll(Section::class,'', ['products']);
+        $this->jquery->renderView('MainController/store.html',['section'=>$sections]);
+	}
+
 }
