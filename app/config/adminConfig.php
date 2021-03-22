@@ -52,7 +52,8 @@ return array(
 			],
 	"part2"=>[
 			"themes",
-			"composer"
+			"composer",
+			"security"
 			],
 	"style"=>"inverted"
 	);

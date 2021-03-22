@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a754a5fae99b2702b735ffcb75b19d76",
+    "content-hash": "17c72e86bed4293957d628e10b347869",
     "packages": [
         {
             "name": "frameworks/jquery",
@@ -159,6 +159,60 @@
                 "source": "https://github.com/phpMv/ubiquity/tree/2.4.3"
             },
             "time": "2021-03-07T19:10:29+00:00"
+        },
+        {
+            "name": "phpmv/ubiquity-security",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpMv/ubiquity-security.git",
+                "reference": "d186bd411cb98d16807d433e91f2a640e7befca6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpMv/ubiquity-security/zipball/d186bd411cb98d16807d433e91f2a640e7befca6",
+                "reference": "d186bd411cb98d16807d433e91f2a640e7befca6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ubiquity\\": "src/Ubiquity/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-Christophe HERON",
+                    "email": "myaddressmail@gmail.com",
+                    "role": "Lead developer"
+                }
+            ],
+            "description": "Security module for Ubiquity framework",
+            "keywords": [
+                "framework",
+                "mvc",
+                "php",
+                "php-framework",
+                "security",
+                "tools"
+            ],
+            "support": {
+                "issues": "https://github.com/phpMv/ubiquity-security/issues",
+                "source": "https://github.com/phpMv/ubiquity-security/tree/0.0.2"
+            },
+            "time": "2021-01-03T18:43:54+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -764,7 +818,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4"
+        "php": ">=8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
