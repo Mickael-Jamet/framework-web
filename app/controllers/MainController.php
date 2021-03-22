@@ -51,9 +51,9 @@ class MainController extends ControllerBase{
 	}
 
 
-	#[Route(path: "section/{id}",name: "section")]
-	public function section($id){
-        $section=DAO::getById(Section::class,$id,['products']);
+	#[Route(path: "section/{idSection}",name: "section")]
+	public function section($idSection){
+        $section=DAO::getById(Section::class,$idSection,['products']);
         if(!URequest::isAjax()) {
             $content=$this->loadDefaultView(compact('section'),true);
             $this->store($content);
@@ -63,18 +63,26 @@ class MainController extends ControllerBase{
 	}
 
 
-	#[Route(path: "detailsProduit/{idS}/{idP}",name: "main.detailsProduit")]
-	public function detailsProduit($idS,$idP){
-
-		$this->loadView('MainController/detailsProduit.html');
+	#[Route(path: "product/{idSection}/{idProduit}",name: "main.product")]
+	public function product($idSection,$idProduit){
+		
+		$this->loadView('MainController/product.html');
 
 	}
 
 
-	#[Route(path: "product/{id}",name: "main.product")]
-	public function product($id){
+	#[Route(path: "basket/add/{idProduct}",name: "main.add")]
+	public function add($idProduct){
+		
+		$this->loadView('MainController/add.html');
 
-		$this->loadView('MainController/product.html');
+	}
+
+
+	#[Route(path: "basket/addTo/{idBasket}/{idProduct}",name: "main.addTo")]
+	public function addTo($idBasket,$idProduct){
+		
+		$this->loadView('MainController/addTo.html');
 
 	}
 
