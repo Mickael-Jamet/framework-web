@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17c72e86bed4293957d628e10b347869",
+    "content-hash": "e053558860f14eade7be42c53f2e605c",
     "packages": [
         {
             "name": "frameworks/jquery",
@@ -104,16 +104,16 @@
         },
         {
             "name": "phpmv/ubiquity",
-            "version": "2.4.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpMv/ubiquity.git",
-                "reference": "684c0dd5e319b8feacd1c2e098d1008ef6458538"
+                "reference": "d0c6b1f3aa23971a65be42c3e19e6457dd379156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpMv/ubiquity/zipball/684c0dd5e319b8feacd1c2e098d1008ef6458538",
-                "reference": "684c0dd5e319b8feacd1c2e098d1008ef6458538",
+                "url": "https://api.github.com/repos/phpMv/ubiquity/zipball/d0c6b1f3aa23971a65be42c3e19e6457dd379156",
+                "reference": "d0c6b1f3aa23971a65be42c3e19e6457dd379156",
                 "shasum": ""
             },
             "require": {
@@ -125,6 +125,7 @@
                 "phpmv/ubiquity-dev": "^0.1",
                 "phpmv/ubiquity-devtools": "dev-master"
             },
+            "default-branch": true,
             "type": "framework",
             "extra": {
                 "branch-alias": {
@@ -156,9 +157,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpMv/ubiquity/issues",
-                "source": "https://github.com/phpMv/ubiquity/tree/2.4.3"
+                "source": "https://github.com/phpMv/ubiquity/tree/master"
             },
-            "time": "2021-03-07T19:10:29+00:00"
+            "time": "2021-04-08T23:47:57+00:00"
         },
         {
             "name": "phpmv/ubiquity-security",
@@ -813,6 +814,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "phpmv/ubiquity": 20,
         "phpmv/ubiquity-attributes": 20
     },
     "prefer-stable": false,

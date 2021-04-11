@@ -1,5 +1,7 @@
 <?php
 namespace controllers;
+use classes\BasketSession;
+use models\Basket;
 use models\User;
 use Ubiquity\orm\DAO;
 use Ubiquity\utils\flash\FlashMessage;
@@ -21,20 +23,39 @@ class MyAuth extends \Ubiquity\controllers\auth\AuthController{
 		}else{
             UResponse::header('location', '/');
 		}
+        USession::set('recentViewedproducts',[]);
+        UResponse::header('location','/');
 	}
 
 	protected function _connect() {
 		if(URequest::isPost()){
 			$email=URequest::post($this->_getLoginInputName());
-            $password=URequest::post($this->_getPasswordInputName());
-            if($email != null && $password != null ){
+            if($email != null){
+                $password=URequest::post($this->_getPasswordInputName());
                 $user=DAO::getOne(User::class,'email= ?', false, [$email]);
-                if (isset($user)){
-                    return $user;
+                if (isset($user) && $user->getPassword() == $password){
+                    $basket = DAO::getOne(Basket::class, 'name = ?', false, ['_default']);
+                    if (!$basket)
+                    {
+                        $basket = new Basket();
+                        $basket->setName('_default');
+                        $basket->setUser($user);
+                        if (DAO::save($basket))
+                        {
+                            $LocalBasket = new BasketSession(DAO::getOne(Basket::class, 'name = ?', false, ['_default']));
+                            USession::set('defaultBasket', $LocalBasket);
+                            return $user;
+                        } else {
+                            echo "BDD erreur user";
+                        }
+                    } else {
+                        $LocalBasket = new BasketSession($basket);
+                        USession::set('defaultBasket', $LocalBasket);
+                        return $user;
+                    }
                 }
             }
 		}
-		return;
 	}
 	
 	/**

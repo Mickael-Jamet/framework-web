@@ -96,4 +96,35 @@ class MainController extends ControllerBase{
 		$basket->addProduct($idProduct, $qtt);
 	}
 
+
+	#[Route(path: "basket/{idBasket}",name: "basket")]
+	public function basket($idBasket){
+        $basket = DAO::getById(Basketdetail::class, $idBasket, ['products']);
+		$this->loadView('MainController/basket.html', ["basket"=>$basket]);
+	}
+
+
+	#[Route(path: "basket/validate",name: "validate")]
+	public function validate(){
+		$this->loadView('MainController/validate.html');
+	}
+
+
+	#[Route(path: "basket/timeslot/{idTimeslot}",name: "timeslot")]
+	public function timeslot($idTimeslot){
+		$this->loadView('MainController/timeslot.html');
+	}
+
+
+	#[Route(path: "basket/command",name: "command")]
+	public function command(){
+		$this->loadView('MainController/command.html');
+	}
+
+
+	#[Route(path: "basket/clear",name: "clear")]
+	public function clear(){
+		$this->loadView('MainController/clear.html');
+	}
+
 }
