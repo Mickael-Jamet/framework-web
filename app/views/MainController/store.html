@@ -1,24 +1,53 @@
-<div class="ui container">
-    {% for section in sections %}
-        <a href="{{ path('section', [section.id]) }}" class="item">{{ section }}
-            <span class="ui circular label">{{ section.products|length }}</span>
-        </a></br>
-    {% endfor %}
-</div>
-<div class="center aligned two column row">
-    <div class="ui attached segment">Promotions en cours
-        <div class="ui tiny horizontal list">
-            {% for promo in promos %}
-            <div class="item">
-                <div class="content">
-                    <div class="header">{{ promo.name }}</div>
-                    <div class="body">{{ promo.price }}</div>
-                </div>
-            </div>
+<div class="ui grid">
+    <div class="four wide column">
+        <a class="ui teal button" href="{{ path('home') }}" >Tableau de bord</a>
+        <div class="ui vertical inverted menu">
+            {% for section in sections %}
+            <a href="{{ path('section', [section.id]) }}" class="item">{{ section }}
+                <span class="ui circular label">{{ section.products|length }}</span>
+            </a></br>
             {% endfor %}
         </div>
     </div>
-</div>
-<div class="sixteen wide column">
-    <div class="ui attached segment"> Consultés récemment</div>
+    {% if content %}
+        <div class="twelve wide stretched column"><div class="column">{{ content|raw }}</div></div>
+    {% else %}
+    <div class="twelve wide stretched column">
+        <div  class="ui one column grid">
+            <div class="ui attached segment">Promotions en cours</div>
+            <div class="ui attached blue segment">
+                <div class="ui divided list">
+                    <div class="item">
+                        <div class="ui four column grid">
+                            {% for product in promos %}
+                            <div class="column">
+                                <a href="{{ path('product',[product.section.id, product.id]) }}" class="item">{{ product.name }}</a><br>
+                                <label>{{ product.price }} €</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  class="ui one column grid">
+            <div class="ui attached segment">Consultés récemment</div>
+            <div class="ui attached black segment">
+                <div class="ui divided list">
+                    <div class="item">
+                        <div class="ui four column grid">
+                            {% for product in recentViewedProducts %}
+                            <div class="column">
+                                <a href="{{ path('product',[sections.id, product.id]) }}" class="item">{{ product.name }}</a><br>
+                                <a class="ui tag label">{{ product.price }} €</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>

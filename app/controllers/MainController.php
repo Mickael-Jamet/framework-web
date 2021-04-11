@@ -26,7 +26,7 @@ class MainController extends ControllerBase{
     #[Route('_default',name:'index')]
 	public function index(){
         $user=$this->_getAuthController()->_getActiveUser();
-        $this->repo->byId($user->getId(),true,false,'user');
+        //$this->repo->byId($user->getId(),true,false,'user');
         $promos=DAO::getAll(Product::class,'promotion<?',false,[0]);
         $this->jquery->renderView("MainController/index.html",["promos"=>$promos]);
 	}
@@ -68,7 +68,7 @@ class MainController extends ControllerBase{
 	}
 
 
-	#[Route(path: "product/{idSection}/{idProduit}",name: "main.product")]
+	#[Route(path: "product/{idSection}/{idProduit}",name: "product")]
 	public function product($idSection,$idProduit){
 		$section = DAO::getById(Section::class, $idSection, false);
 		$product = DAO::getById(Product::class, $idProduit, false);
@@ -81,7 +81,7 @@ class MainController extends ControllerBase{
 	}
 
 
-	#[Route(path: "basket/add/{idProduct}",name: "main.add")]
+	#[Route(path: "basket/add/{idProduct}",name: "add")]
 	public function add($idProduct){
         $product = DAO::getById(Product::class, $idProduct, false);
         $dB = USession::get('defaultBasket');
@@ -89,7 +89,7 @@ class MainController extends ControllerBase{
 	}
 
 
-	#[Route(path: "basket/addTo/{idBasket}/{idProduct}",name: "main.addTo")]
+	#[Route(path: "basket/addTo/{idBasket}/{idProduct}",name: "addTo")]
 	public function addTo($idBasket,$idProduct){
 		$basket = DAO::getById(Basketdetail::class, $idBasket, ['products']);
 		$qtt = $basket->getQuantity();

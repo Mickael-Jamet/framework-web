@@ -1,6 +1,11 @@
-{{ section.name }}
-<a class="ui teal right floated button" href="{{ path('store') }}" >Retour au store</a>
-<a class="item">{{ product.name }}</a><br>
-<a class="item">{{ product.price }} €</a><br><br>
-<a href="{{ path('add.basket', [product.id]) }}" class="tiny ui teal button"><i class="shopping basket icon"></i>Panier</a>
-<a href="{{ path('addTo.basket', [basket.id,product.id]) }}" class="tiny ui teal basic button"><i class="shopping basket icon"></i></a>
+<div class="ui attached segment">
+    {{ section.name }}
+    <a class="ui teal right floated button" href="{{ path('store') }}" >Retour au store</a>
+</div><br>
+
+<div class="ui attached segment">
+    <a class="item">{{ product.name }}</a><br>
+    <a class="item">{{ product.price }} €</a><br><br>
+    <a href="{{ path('add.basket', [product.id]) }}" class="tiny ui green button"><i class="shopping basket icon"></i>Panier</a>
+    <a href="{{ path('addTo.basket', [basket.id,product.id]) }}" class="tiny ui green basic button"><i class="shopping basket icon"></i></a>
+</div>

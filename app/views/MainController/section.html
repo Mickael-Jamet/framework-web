@@ -1,4 +1,17 @@
-<h1>{{ section.name }}</h1>
-{% for produit in section.products %}
-{{ produit.name }}
-{% endfor %}è
+<div class="ui attached segment">
+    {{ section.name }}
+    <br>
+    <a class="ui green right button" href="{{ path('store') }}" >Retour au store</a>
+</div>
+<br>
+
+<div class="ui six column grid">
+    {% for product in section.products %}
+    <div class="column">
+        <div class="ui segment">
+            <a href="{{ path('product',[section.id, product.id]) }}" class="item">{{ product.name }}</a><br>
+            <label>{{ product.price }} €</label>
+        </div>
+    </div>
+    {% endfor %}
+</div>
