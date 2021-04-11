@@ -1,5 +1,7 @@
 <?php
 namespace controllers;
+use models\Basket;
+use models\Basketdetail;
 use models\Product;
 use models\Section;
 use Ubiquity\attributes\items\di\Autowired;
@@ -10,6 +12,7 @@ use services\dao\UserRepository;
 use services\ui\UIServices;
 use Ubiquity\orm\DAO;
 use Ubiquity\utils\http\URequest;
+use Ubiquity\utils\http\USession;
 
 /**
   * Controller MainController
@@ -47,7 +50,9 @@ class MainController extends ControllerBase{
 	#[Route(path: "store",name: "store")]
 	public function store($content=''){
         $sections = DAO::getAll(Section::class, '', ['products']);
-        $this->jquery->renderView('MainController/store.html', compact('sections', 'content'));
+        $promos = DAO::getAll(Product::class, 'promotion<?', ['sections'], [0]);
+        $rVP = USession::get('recentViewedProducts');
+        $this->jquery->renderView('MainController/store.html', compact('sections', 'content', 'promos', 'rVP'));
 	}
 
 
@@ -65,25 +70,30 @@ class MainController extends ControllerBase{
 
 	#[Route(path: "product/{idSection}/{idProduit}",name: "main.product")]
 	public function product($idSection,$idProduit){
-		
-		$this->loadView('MainController/product.html');
-
+		$section = DAO::getById(Section::class, $idSection, false);
+		$product = DAO::getById(Product::class, $idProduit, false);
+        if(!URequest::isAjax()){
+            $content = $this->loadView('MainController/product.html', ['product'=>$product, 'section'=>$section],true);
+            $this->store($content);
+            return;
+        }
+		$this->loadView('MainController/product.html', ["product"=>$product, "section"=>$section]);
 	}
 
 
 	#[Route(path: "basket/add/{idProduct}",name: "main.add")]
 	public function add($idProduct){
-		
-		$this->loadView('MainController/add.html');
-
+        $product = DAO::getById(Product::class, $idProduct, false);
+        $dB = USession::get('defaultBasket');
+        $dB->addProduct($product, 1);
 	}
 
 
 	#[Route(path: "basket/addTo/{idBasket}/{idProduct}",name: "main.addTo")]
 	public function addTo($idBasket,$idProduct){
-		
-		$this->loadView('MainController/addTo.html');
-
+		$basket = DAO::getById(Basketdetail::class, $idBasket, ['products']);
+		$qtt = $basket->getQuantity();
+		$basket->addProduct($idProduct, $qtt);
 	}
 
 }
