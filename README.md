@@ -1,7 +1,7 @@
 # tds
 
-This README outlines the details of collaborating on this Ubiquity application.
-A short introduction of this app could easily go here.
+Ce projet consiste à créer une application web permettant de commander des produits en ligne.
+Ce projet utilise le framework Ubiquity.
 
 ## Prerequisites
 
